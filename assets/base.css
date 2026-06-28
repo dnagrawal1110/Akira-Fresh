@@ -519,6 +519,29 @@ p:empty {
   overflow: hidden;
 }
 
+/* Shop by Category: bold the category titles. */
+[id$="col_list_cats"] .collection-card p {
+  font-weight: 600;
+}
+
+/* Flash Sale: give the cards a distinct "urgency" treatment — warm tinted
+   tile, coral border and coral sale badges — so they stand apart from the
+   regular product rows. */
+[id$="pl_flash_sale"] .product-card {
+  background: #fff4ee;
+  border: 1px solid #f2d4c6;
+  border-radius: 16px;
+  padding: 10px;
+}
+
+[id$="pl_flash_sale"] .product-card .card-gallery {
+  border-radius: 10px;
+}
+
+[id$="pl_flash_sale"] .product-badges__badge {
+  background: #d8542c !important;
+}
+
 .section--height-small {
   --section-min-height: var(--section-height-small);
 }
