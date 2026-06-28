@@ -483,6 +483,22 @@ p:empty {
   grid-column: 1 / -1;
 }
 
+/* Keep carousels inside page-width sections contained to the centered column
+   so product/collection rows line up with their headings instead of bleeding
+   off the right edge. Mobile keeps the edge-to-edge carousel. */
+@media screen and (min-width: 750px) {
+  .section--page-width > .force-full-width {
+    grid-column: 2;
+  }
+
+  .section--page-width > .force-full-width slideshow-slides {
+    padding-left: 0;
+    padding-right: 0;
+    scroll-padding-left: 0;
+    scroll-padding-right: 0;
+  }
+}
+
 .section--height-small {
   --section-min-height: var(--section-height-small);
 }
