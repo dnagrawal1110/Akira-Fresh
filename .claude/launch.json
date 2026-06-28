@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "akira",
+      "runtimeExecutable": "shopify",
+      "runtimeArgs": ["theme", "dev", "--theme", "143764684884", "--store", "2vba05-1y.myshopify.com"],
+      "port": 9292,
+      "autoPort": false
+    }
+  ]
+}

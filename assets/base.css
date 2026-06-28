@@ -542,6 +542,82 @@ p:empty {
   background: #d8542c !important;
 }
 
+/* ---- Header: inline search bar + two-tier nav polish ---- */
+.header-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 auto;
+  max-width: 540px;
+  margin-inline: 28px;
+  padding: 0 8px 0 16px;
+  height: 44px;
+  background: #fff;
+  border: 1px solid #e2dccd;
+  border-radius: 999px;
+}
+
+.header-search-bar__icon {
+  display: flex;
+  align-items: center;
+  color: #1b5e20;
+}
+
+.header-search-bar__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.header-search-bar__input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  color: #263238;
+}
+
+.header-search-bar__submit {
+  flex: none;
+  border: none;
+  cursor: pointer;
+  background: #1b5e20;
+  color: #fff;
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-size: 13px;
+}
+
+/* On desktop the inline bar replaces the modal search icon in the header. */
+@media screen and (min-width: 750px) {
+  .header .search-action {
+    display: none;
+  }
+}
+
+/* Hide the inline bar on mobile (modal search icon is used there). */
+@media screen and (max-width: 749px) {
+  .header-search-bar {
+    display: none;
+  }
+}
+
+/* Bottom category strip: center, subtle top divider, green hover. */
+.header__row--bottom {
+  justify-content: center;
+}
+
+.header__row--bottom .header-menu a:hover,
+.header__row--bottom .menu__item a:hover {
+  color: #1b5e20;
+}
+
+/* Subtle shadow once the sticky header is engaged. */
+.header[sticky] {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+}
+
 .section--height-small {
   --section-min-height: var(--section-height-small);
 }

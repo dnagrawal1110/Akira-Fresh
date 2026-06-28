@@ -1,0 +1,26 @@
+{%- doc -%}
+  Inline search bar for the header (desktop). Submits to the search results
+  page. The modal search button is kept for mobile.
+{%- enddoc -%}
+
+<form
+  action="{{ routes.search_url }}"
+  method="get"
+  role="search"
+  class="header-search-bar mobile:hidden"
+>
+  <span class="header-search-bar__icon svg-wrapper">
+    {{- 'icon-search.svg' | inline_asset_content -}}
+  </span>
+  <input
+    type="search"
+    name="q"
+    value="{{ search.terms | escape }}"
+    placeholder="Search for fresh chicken, mutton, snacks…"
+    class="header-search-bar__input"
+    aria-label="Search"
+    autocomplete="off"
+  >
+  <input type="hidden" name="options[prefix]" value="last">
+  <button type="submit" class="header-search-bar__submit">Search</button>
+</form>
