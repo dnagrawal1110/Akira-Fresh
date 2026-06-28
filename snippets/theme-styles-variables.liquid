@@ -134,6 +134,11 @@
     --normal-page-width: 120rem;
     --wide-page-width: 150rem;
 
+    /* Card corner radii (wired globally from theme settings so product/
+       collection cards across the storefront pick them up) */
+    --product-corner-radius: {{ settings.product_corner_radius | default: 8 }}px;
+    --card-corner-radius: {{ settings.card_corner_radius | default: 8 }}px;
+
     /* Section Heights */
     --section-height-small: 15rem;
     --section-height-medium: 25rem;

@@ -284,7 +284,7 @@
       "name": "Hero Slideshow",
       "settings": {
         "display_mode": "full_frame",
-        "section_width": "full-width",
+        "section_width": "page-width",
         "slide_height": "large",
         "content_position": "on-media",
         "icons_style": "arrows_large",
@@ -292,7 +292,7 @@
         "slideshow_controls_style": "dots",
         "autoplay": true,
         "autoplay_speed": 5,
-        "background_color": "#1B5E20",
+        "background_color": "#F7F4EE",
         "padding-block-start": 0,
         "padding-block-end": 0
       }
@@ -385,9 +385,11 @@
       "name": "Shop by Category",
       "settings": {
         "collection_list": ["bestsellers", "flash-sale", "chicken-snacks", "kebabs", "momos", "sausages-cold-cuts", "mutton", "delicacies-ready-to-grill", "family-packs"],
-        "layout_type": "carousel",
-        "columns": 7,
-        "mobile_card_size": "22cqw",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "columns": 8,
+        "max_collections": 9,
+        "mobile_card_size": "44cqw",
         "columns_gap": 16,
         "icons_style": "arrow",
         "icons_shape": "none",

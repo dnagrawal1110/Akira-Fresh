@@ -499,6 +499,26 @@ p:empty {
   }
 }
 
+/* Shop by Category list: 4 per row on mobile, all items in a single row on
+   desktop. Scoped to the category section so other collection lists are
+   unaffected. */
+[id$="col_list_cats"] .resource-list--grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media screen and (min-width: 750px) {
+  [id$="col_list_cats"] .resource-list--grid {
+    grid-template-columns: repeat(9, 1fr);
+  }
+}
+
+/* Round product-card media using the global corner-radius setting (the base
+   theme only rounds the title placeholder, leaving real card images square). */
+.product-card .card-gallery {
+  border-radius: var(--product-corner-radius);
+  overflow: hidden;
+}
+
 .section--height-small {
   --section-min-height: var(--section-height-small);
 }
