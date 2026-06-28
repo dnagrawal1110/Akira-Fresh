@@ -116,6 +116,27 @@
     "
   >
     {{ children }}
+    {%- unless onboarding -%}
+      {%- liquid
+        assign meta_variant = product.selected_or_first_available_variant
+        assign meta_weight = meta_variant.weight
+        assign meta_pieces = product.metafields.custom.pieces
+        assign meta_serves = product.metafields.custom.serves
+      -%}
+      {%- if meta_weight > 0 or meta_pieces != blank or meta_serves != blank -%}
+        <div class="product-card__meta">
+          {%- if meta_weight > 0 -%}
+            <span>{{ meta_weight | weight_with_unit: meta_variant.weight_unit }}</span>
+          {%- endif -%}
+          {%- if meta_pieces != blank -%}
+            <span>{{ meta_pieces }}</span>
+          {%- endif -%}
+          {%- if meta_serves != blank -%}
+            <span>Serves {{ meta_serves }}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endunless -%}
   </div>
 </product-card>
 
