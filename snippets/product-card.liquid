@@ -133,8 +133,7 @@
       <div class="product-card__meta">
         <span class="product-card__veg" aria-hidden="true" title="Non-vegetarian"></span>
         <span class="product-card__meta-text">
-          {%- if meta_protein != blank -%}{{ meta_protein }} protein · {% elsif meta_weight > 0 %}{{ meta_weight | weight_with_unit: meta_variant.weight_unit }} · {% endif -%}
-          Ready in 5 min
+          {%- if meta_protein != blank -%}{{ meta_protein }} protein{% elsif meta_weight > 0 %}{{ meta_weight | weight_with_unit: meta_variant.weight_unit }}{% endif -%}
         </span>
       </div>
     {%- endunless -%}

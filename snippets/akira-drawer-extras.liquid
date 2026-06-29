@@ -1,0 +1,83 @@
+{%- doc -%}
+  Premium extras for the mobile menu drawer: delivery line, shop-by-category
+  quick links, and account/contact links.
+{%- enddoc -%}
+
+<div class="akira-drawer">
+  <div class="akira-drawer__deliver">
+    <span class="akira-drawer__deliver-dot" aria-hidden="true"></span>
+    Currently delivering across <strong>Delhi NCR</strong>
+  </div>
+
+  {%- assign cat_handles = 'chicken-snacks,kebabs,momos,sausages-cold-cuts,mutton,family-packs' | split: ',' -%}
+  {%- assign shown = 0 -%}
+  {%- capture cat_links -%}
+    {%- for h in cat_handles -%}
+      {%- assign col = collections[h] -%}
+      {%- if col != empty and col.products_count > 0 -%}
+        <a class="akira-drawer__cat" href="{{ col.url }}">
+          {%- if col.featured_image -%}
+            <span class="akira-drawer__cat-img">{{ col.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '120' }}</span>
+          {%- endif -%}
+          <span class="akira-drawer__cat-name">{{ col.title }}</span>
+        </a>
+        {%- assign shown = shown | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- if shown > 0 -%}
+    <p class="akira-drawer__heading">Shop by category</p>
+    <div class="akira-drawer__cats">{{ cat_links }}</div>
+  {%- endif -%}
+
+  <div class="akira-drawer__links">
+    <a href="{{ routes.account_url | default: '/account' }}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+      My account
+    </a>
+    <a href="{{ routes.search_url }}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+      Search products
+    </a>
+    <a href="/pages/contact">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Help &amp; contact
+    </a>
+  </div>
+</div>
+
+{% stylesheet %}
+  /* Premium mobile menu items */
+  .menu-drawer__menu-item--mainlist,
+  .menu-drawer .menu-drawer__menu-item--flat .menu-drawer__menu-item {
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding-block: 16px;
+  }
+  .menu-drawer__list-item { border-bottom: 1px solid #ECE6D8; }
+
+  .akira-drawer { padding: 4px 0 8px; display: flex; flex-direction: column; gap: 18px; }
+  .akira-drawer__deliver {
+    display: flex; align-items: center; gap: 8px;
+    background: #EAF1E8; color: #1B5E20; font-weight: 600; font-size: 0.85rem;
+    padding: 11px 14px; border-radius: 12px;
+  }
+  .akira-drawer__deliver-dot { width: 8px; height: 8px; border-radius: 50%; background: #1B5E20; box-shadow: 0 0 0 3px rgba(27,94,32,.15); flex: none; }
+  .akira-drawer__deliver strong { color: #14471a; }
+
+  .akira-drawer__heading { margin: 0 0 4px; font-size: 0.75rem; letter-spacing: .06em; text-transform: uppercase; color: #8a8a80; font-weight: 600; }
+  .akira-drawer__cats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .akira-drawer__cat { display: flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; color: #263238; }
+  .akira-drawer__cat-img { display: block; width: 100%; aspect-ratio: 1/1; border-radius: 12px; overflow: hidden; background: #F7F4EE; }
+  .akira-drawer__cat-img img { width: 100%; height: 100%; object-fit: cover; }
+  .akira-drawer__cat-name { font-size: 0.78rem; text-align: center; line-height: 1.2; }
+
+  .akira-drawer__links { display: flex; flex-direction: column; }
+  .akira-drawer__links a {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 2px; text-decoration: none; color: #263238; font-weight: 500;
+    border-top: 1px solid #ECE6D8;
+  }
+  .akira-drawer__links a svg { width: 20px; height: 20px; color: #1B5E20; flex: none; }
+{% endstylesheet %}
