@@ -1,0 +1,20 @@
+{%- doc -%}
+  Editorial hero banner for the product page. Shows the image when set, else a
+  styled brand placeholder. Minimal text: one headline + one supporting line.
+  @param {object} [image] - banner image
+  @param {string} heading
+  @param {string} [sub]
+  @param {string} [theme] - 'dark' or 'green'
+{%- enddoc -%}
+
+<section class="akira-banner akira-banner--{{ theme | default: 'green' }}">
+  {%- if image != blank -%}
+    {{ image | image_url: width: 1600 | image_tag: loading: 'lazy', class: 'akira-banner__img' }}
+    <span class="akira-banner__scrim" aria-hidden="true"></span>
+  {%- endif -%}
+  <div class="akira-banner__inner">
+    <span class="akira-banner__tag">Akira Fresh</span>
+    <h2 class="akira-banner__h">{{ heading }}</h2>
+    {%- if sub != blank -%}<p class="akira-banner__sub">{{ sub }}</p>{%- endif -%}
+  </div>
+</section>
