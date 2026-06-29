@@ -123,6 +123,8 @@
         assign meta_protein = product.metafields.custom.protein_per_serving
         assign meta_rating = product.metafields.reviews.rating.value
         assign meta_rating_count = product.metafields.reviews.rating_count
+        assign meta_price = meta_variant.price
+        assign meta_compare = meta_variant.compare_at_price
       -%}
       {%- if meta_rating != blank -%}
         <span class="product-card__rating">
@@ -144,6 +146,14 @@
             {{ meta_protein }} protein
           </span>
         {%- endif -%}
+        <span class="product-card__price">
+          <span class="product-card__price-now">{{ meta_price | money }}</span>
+          {%- if meta_compare > meta_price -%}
+            <s class="product-card__price-was">{{ meta_compare | money }}</s>
+            {%- assign meta_pct = meta_compare | minus: meta_price | times: 100 | divided_by: meta_compare -%}
+            <span class="product-card__price-off">{{ meta_pct }}% off</span>
+          {%- endif -%}
+        </span>
         <span class="product-card__slot">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Today 6AM&nbsp;-&nbsp;8AM
