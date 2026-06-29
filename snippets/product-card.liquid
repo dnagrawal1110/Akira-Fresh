@@ -120,22 +120,23 @@
       {%- liquid
         assign meta_variant = product.selected_or_first_available_variant
         assign meta_weight = meta_variant.weight
-        assign meta_pieces = product.metafields.custom.pieces
-        assign meta_serves = product.metafields.custom.serves
+        assign meta_protein = product.metafields.custom.protein_per_serving
+        assign meta_rating = product.metafields.reviews.rating.value
+        assign meta_rating_count = product.metafields.reviews.rating_count
       -%}
-      {%- if meta_weight > 0 or meta_pieces != blank or meta_serves != blank -%}
-        <div class="product-card__meta">
-          {%- if meta_weight > 0 -%}
-            <span>{{ meta_weight | weight_with_unit: meta_variant.weight_unit }}</span>
-          {%- endif -%}
-          {%- if meta_pieces != blank -%}
-            <span>{{ meta_pieces }}</span>
-          {%- endif -%}
-          {%- if meta_serves != blank -%}
-            <span>Serves {{ meta_serves }}</span>
-          {%- endif -%}
-        </div>
+      {%- if meta_rating != blank -%}
+        <span class="product-card__rating">
+          <svg viewBox="0 0 20 20" class="product-card__rating-star"><path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 15l-5.2 2.6 1-5.8L1.5 7.7l5.9-.9z"/></svg>
+          {{ meta_rating.rating }} ({{ meta_rating_count | default: 0 }})
+        </span>
       {%- endif -%}
+      <div class="product-card__meta">
+        <span class="product-card__veg" aria-hidden="true" title="Non-vegetarian"></span>
+        <span class="product-card__meta-text">
+          {%- if meta_protein != blank -%}{{ meta_protein }} protein · {% elsif meta_weight > 0 %}{{ meta_weight | weight_with_unit: meta_variant.weight_unit }} · {% endif -%}
+          Ready in 5 min
+        </span>
+      </div>
     {%- endunless -%}
   </div>
 </product-card>

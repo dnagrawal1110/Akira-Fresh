@@ -619,22 +619,57 @@ p:empty {
 }
 
 /* ---- Product card maturity ---- */
-/* Meta row: weight | pieces | serves */
-.product-card__meta {
-  display: flex;
-  flex-wrap: wrap;
+/* Rating pill (shows only when a reviews app populates the metafield). */
+.product-card__rating {
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 2px;
+  gap: 4px;
+  margin-top: 4px;
   font-size: 12px;
-  line-height: 1.3;
-  color: #6b6b63;
+  font-weight: 600;
+  color: #1b5e20;
 }
 
-.product-card__meta span:not(:last-child)::after {
-  content: "|";
-  margin-left: 8px;
-  color: #d8d2c4;
+.product-card__rating-star {
+  width: 13px;
+  height: 13px;
+  fill: #1b8a3a;
+}
+
+/* Meta line: veg mark + "protein · Ready in 5 min" (amber, like the references). */
+.product-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 4px;
+  font-size: 12.5px;
+  line-height: 1.3;
+}
+
+.product-card__veg {
+  flex: none;
+  width: 13px;
+  height: 13px;
+  border: 1.5px solid #a3341f;
+  border-radius: 3px;
+  position: relative;
+}
+
+.product-card__veg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 6px solid #a3341f;
+}
+
+.product-card__meta-text {
+  color: #a66a2c;
+  font-weight: 500;
 }
 
 /* Consistent square media so rows line up cleanly. */
@@ -649,9 +684,7 @@ p:empty {
   object-fit: cover;
 }
 
-/* A clearer, brand-coloured quick-add button: solid green with a white ring
-   and shadow so it stays visible on busy product photos. */
-.product-card .quick-add-component button,
+/* Quick-add: solid green circle with white icon + ring, visible at rest. */
 .product-card .quick-add__button {
   background: #1b5e20;
   color: #fff;
@@ -659,18 +692,14 @@ p:empty {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
 }
 
-.product-card .quick-add-component button svg,
 .product-card .quick-add__button svg {
   color: #fff;
 }
 
-.product-card .quick-add-component button:hover,
 .product-card .quick-add__button:hover {
   background: #14471a;
 }
 
-/* Keep the quick-add button visible at rest on desktop (the base theme only
-   reveals it on hover, making it easy to miss). */
 @media screen and (min-width: 750px) {
   .product-card .quick-add__button {
     opacity: 1;
