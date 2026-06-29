@@ -1,19 +1,24 @@
 {%- doc -%}
-  Akira buy-box extras inside the product detail column: rating placeholder,
-  short intro, key-highlight chips, offer callout, and the Delhi NCR line.
-  All degrade gracefully when their metafield is empty.
+  Akira buy-box extras: rating, short intro, colourful key-highlight pills,
+  a "loved by" trust banner, offer callout and the Delhi NCR line.
 {%- enddoc -%}
 
 {%- liquid
   assign p = closest.product | default: product
   assign mf = p.metafields.custom
-  assign highlights = mf.key_highlights.value
   assign rating = p.metafields.reviews.rating.value
   assign rating_count = p.metafields.reviews.rating_count
+
+  # Key highlights: handle a proper list OR a JSON-string left by CSV import.
+  assign hl = mf.key_highlights.value
+  if hl contains '","'
+    assign highlights = hl | replace: '[', '' | replace: ']', '' | replace: '"', '' | split: ', '
+  else
+    assign highlights = hl
+  endif
 -%}
 
 <div class="akira-buybox">
-  {%- comment -%} Rating — uses reviews metafields when a reviews app is connected, else a placeholder {%- endcomment -%}
   <div class="akira-rating">
     <span class="akira-rating__stars" aria-hidden="true">
       {%- assign filled = rating.rating | default: 0 | round -%}
@@ -35,12 +40,16 @@
   {%- if highlights != blank and highlights.size > 0 -%}
     <ul class="akira-chips" role="list">
       {%- for h in highlights -%}
-        <li class="akira-chip">{{ h }}</li>
+        <li class="akira-chip akira-chip--{{ forloop.index0 | modulo: 4 }}">{{ h | strip }}</li>
       {%- endfor -%}
     </ul>
   {%- endif -%}
 
-  {%- comment -%} Offer callout {%- endcomment -%}
+  <div class="akira-loved">
+    <span class="akira-loved__stars" aria-hidden="true">★★★★★</span>
+    Loved by families across <strong>Delhi NCR</strong>
+  </div>
+
   <div class="akira-offer">
     <span class="akira-offer__icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0l-7-7A2 2 0 0 1 3 12.2V5a2 2 0 0 1 2-2h7.2a2 2 0 0 1 1.4.6l7 7a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg>
@@ -63,8 +72,25 @@
   .akira-rating__text { font-size: 0.82rem; color: #263238; }
   .akira-rating__text--muted { color: #8a8a80; }
   .akira-buybox__intro { margin: 0; color: #3a3a36; line-height: 1.6; }
+
+  /* Colourful benefit pills */
   .akira-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-  .akira-chip { background: #EAF1E8; color: #1B5E20; font-size: 0.8rem; font-weight: 500; padding: 6px 12px; border-radius: 999px; }
+  .akira-chip { font-size: 0.8rem; font-weight: 600; padding: 7px 13px; border-radius: 999px; }
+  .akira-chip--0 { background: #EAF1E8; color: #1B5E20; }
+  .akira-chip--1 { background: #FBF0DE; color: #9A5A14; }
+  .akira-chip--2 { background: #E1F2EE; color: #0F6E56; }
+  .akira-chip--3 { background: #F6E9EC; color: #9F3A52; }
+
+  /* "Loved by" gold banner */
+  .akira-loved {
+    display: flex; align-items: center; gap: 8px;
+    background: linear-gradient(90deg, #FFF3D6, #FDE9BE);
+    border: 1px solid #F2D89A; border-radius: 12px;
+    padding: 10px 14px; font-size: 0.88rem; font-weight: 600; color: #7A531A;
+  }
+  .akira-loved__stars { color: #E8A53C; letter-spacing: 1px; }
+  .akira-loved strong { color: #5d3f12; }
+
   .akira-offer { display: flex; align-items: center; gap: 10px; background: #F7F4EE; border: 1px dashed #C9BFA6; border-radius: 12px; padding: 10px 14px; }
   .akira-offer__icon { color: #A66A2C; flex: none; width: 22px; height: 22px; }
   .akira-offer__icon svg { width: 22px; height: 22px; }

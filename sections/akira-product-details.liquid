@@ -187,15 +187,25 @@
   /* Trust badges */
   .akira-trust { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
   .akira-trust__item { display: flex; align-items: center; gap: 10px; }
-  .akira-trust__icon { color: #1B5E20; flex: none; width: 26px; height: 26px; }
-  .akira-trust__icon svg { width: 26px; height: 26px; }
-  .akira-trust__label { font-size: 0.9rem; color: #263238; line-height: 1.25; }
+  .akira-trust__icon { flex: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .akira-trust__icon svg { width: 21px; height: 21px; }
+  .akira-trust__item:nth-child(1) .akira-trust__icon { background: #EAF1E8; color: #1B5E20; }
+  .akira-trust__item:nth-child(2) .akira-trust__icon { background: #FBF0DE; color: #9A5A14; }
+  .akira-trust__item:nth-child(3) .akira-trust__icon { background: #E1F2EE; color: #0F6E56; }
+  .akira-trust__item:nth-child(4) .akira-trust__icon { background: #E6F1FB; color: #185FA5; }
+  .akira-trust__item:nth-child(5) .akira-trust__icon { background: #F6E9EC; color: #9F3A52; }
+  .akira-trust__item:nth-child(6) .akira-trust__icon { background: #EEEDFE; color: #534AB7; }
+  .akira-trust__label { font-size: 0.9rem; color: #263238; line-height: 1.25; font-weight: 500; }
 
   /* Cooking */
   .akira-cooking__grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
-  .akira-cooking__item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; background: #F7F4EE; border-radius: 12px; padding: 16px 10px; }
-  .akira-cooking__icon { color: #1B5E20; width: 30px; height: 30px; }
-  .akira-cooking__icon svg { width: 30px; height: 30px; }
+  .akira-cooking__item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; background: #FBF9F4; border: 1px solid #EFEADF; border-radius: 14px; padding: 18px 10px; }
+  .akira-cooking__icon { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .akira-cooking__icon svg { width: 26px; height: 26px; }
+  .akira-cooking__item:nth-child(1) .akira-cooking__icon { background: #EAF1E8; color: #1B5E20; }
+  .akira-cooking__item:nth-child(2) .akira-cooking__icon { background: #FBF0DE; color: #9A5A14; }
+  .akira-cooking__item:nth-child(3) .akira-cooking__icon { background: #E1F2EE; color: #0F6E56; }
+  .akira-cooking__item:nth-child(4) .akira-cooking__icon { background: #F6E9EC; color: #9F3A52; }
   .akira-cooking__name { font-weight: 600; font-size: 0.92rem; color: #263238; }
   .akira-cooking__time { font-size: 0.82rem; color: #6b6b63; }
 
