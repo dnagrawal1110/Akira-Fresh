@@ -1197,6 +1197,10 @@
       }
     },
 
+    "akira_how_it_works": {
+      "type": "akira-how-it-works",
+      "settings": {}
+    },
     "pl_chicken": {
       "type": "product-list",
       "blocks": {
@@ -1563,6 +1567,7 @@
     "pl_flash_sale",
     "pl_family_packs",
     "marquee_trust",
+    "akira_how_it_works",
     "pl_chicken",
     "pl_kebabs"
   ]

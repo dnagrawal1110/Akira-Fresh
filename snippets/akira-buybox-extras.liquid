@@ -1,6 +1,6 @@
 {%- doc -%}
-  Renders Akira buy-box extras inside the product detail column:
-  short intro, key-highlight chips and the Delhi NCR delivery line.
+  Akira buy-box extras inside the product detail column: rating placeholder,
+  short intro, key-highlight chips, offer callout, and the Delhi NCR line.
   All degrade gracefully when their metafield is empty.
 {%- enddoc -%}
 
@@ -8,9 +8,26 @@
   assign p = closest.product | default: product
   assign mf = p.metafields.custom
   assign highlights = mf.key_highlights.value
+  assign rating = p.metafields.reviews.rating.value
+  assign rating_count = p.metafields.reviews.rating_count
 -%}
 
 <div class="akira-buybox">
+  {%- comment -%} Rating — uses reviews metafields when a reviews app is connected, else a placeholder {%- endcomment -%}
+  <div class="akira-rating">
+    <span class="akira-rating__stars" aria-hidden="true">
+      {%- assign filled = rating.rating | default: 0 | round -%}
+      {%- for i in (1..5) -%}
+        <svg viewBox="0 0 20 20" class="akira-star {% if i <= filled %}is-on{% endif %}"><path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 15l-5.2 2.6 1-5.8L1.5 7.7l5.9-.9z"/></svg>
+      {%- endfor -%}
+    </span>
+    {%- if rating != blank -%}
+      <span class="akira-rating__text">{{ rating.rating }} ({{ rating_count | default: 0 }})</span>
+    {%- else -%}
+      <span class="akira-rating__text akira-rating__text--muted">Be the first to review</span>
+    {%- endif -%}
+  </div>
+
   {%- if mf.short_intro != blank -%}
     <p class="akira-buybox__intro">{{ mf.short_intro }}</p>
   {%- endif -%}
@@ -23,6 +40,14 @@
     </ul>
   {%- endif -%}
 
+  {%- comment -%} Offer callout {%- endcomment -%}
+  <div class="akira-offer">
+    <span class="akira-offer__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0l-7-7A2 2 0 0 1 3 12.2V5a2 2 0 0 1 2-2h7.2a2 2 0 0 1 1.4.6l7 7a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg>
+    </span>
+    <span class="akira-offer__text"><strong>Free delivery</strong> on orders above ₹499 · cold-chain across Delhi NCR</span>
+  </div>
+
   <p class="akira-deliver">
     <span class="akira-deliver__dot" aria-hidden="true"></span>
     Currently delivering across <strong>Delhi NCR</strong>
@@ -31,9 +56,20 @@
 
 {% stylesheet %}
   .akira-buybox { display: flex; flex-direction: column; gap: 14px; }
+  .akira-rating { display: flex; align-items: center; gap: 8px; }
+  .akira-rating__stars { display: inline-flex; gap: 2px; }
+  .akira-star { width: 16px; height: 16px; fill: #E2DCCD; }
+  .akira-star.is-on { fill: #E8A53C; }
+  .akira-rating__text { font-size: 0.82rem; color: #263238; }
+  .akira-rating__text--muted { color: #8a8a80; }
   .akira-buybox__intro { margin: 0; color: #3a3a36; line-height: 1.6; }
   .akira-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
   .akira-chip { background: #EAF1E8; color: #1B5E20; font-size: 0.8rem; font-weight: 500; padding: 6px 12px; border-radius: 999px; }
+  .akira-offer { display: flex; align-items: center; gap: 10px; background: #F7F4EE; border: 1px dashed #C9BFA6; border-radius: 12px; padding: 10px 14px; }
+  .akira-offer__icon { color: #A66A2C; flex: none; width: 22px; height: 22px; }
+  .akira-offer__icon svg { width: 22px; height: 22px; }
+  .akira-offer__text { font-size: 0.85rem; color: #4a463d; }
+  .akira-offer__text strong { color: #1B5E20; }
   .akira-deliver { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 0.88rem; color: #263238; }
   .akira-deliver__dot { width: 8px; height: 8px; border-radius: 50%; background: #1B5E20; flex: none; box-shadow: 0 0 0 3px rgba(27,94,32,.15); }
 {% endstylesheet %}

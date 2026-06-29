@@ -23,15 +23,30 @@
 
     {%- comment -%} Trust badges {%- endcomment -%}
     <ul class="akira-trust" role="list">
-      {%- assign trust = 'Made with Real Meat,Freshly Prepared,Premium Quality,Cold Chain Delivered,FSSAI Certified,Hygienically Packed' | split: ',' -%}
-      {%- for t in trust -%}
-        <li class="akira-trust__item">
-          <span class="akira-trust__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
-          </span>
-          <span class="akira-trust__label">{{ t }}</span>
-        </li>
-      {%- endfor -%}
+      <li class="akira-trust__item">
+        <span class="akira-trust__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4a4 4 0 0 1 4 4c0 2-1.5 3-3 3.5L8 19a3 3 0 0 1-4-4l7.5-8C12 5.5 13 4 15 4z"/><path d="M9 9l2 2"/></svg></span>
+        <span class="akira-trust__label">Made with Real Meat</span>
+      </li>
+      <li class="akira-trust__item">
+        <span class="akira-trust__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21c0-7 4-12 14-13-1 9-6 13-12 13"/><path d="M5 21c0-4 2-7 6-9"/></svg></span>
+        <span class="akira-trust__label">Freshly Prepared</span>
+      </li>
+      <li class="akira-trust__item">
+        <span class="akira-trust__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M9 13.5L8 21l4-2 4 2-1-7.5"/></svg></span>
+        <span class="akira-trust__label">Premium Quality</span>
+      </li>
+      <li class="akira-trust__item">
+        <span class="akira-trust__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M4 7l8 5 8-5M4 17l8-5 8 5M2 12h20"/></svg></span>
+        <span class="akira-trust__label">Cold Chain Delivered</span>
+      </li>
+      <li class="akira-trust__item">
+        <span class="akira-trust__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M9 9l2 2 4-4"/><path d="M8 14l-1 7 5-3 5 3-1-7"/></svg></span>
+        <span class="akira-trust__label">FSSAI Certified</span>
+      </li>
+      <li class="akira-trust__item">
+        <span class="akira-trust__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <span class="akira-trust__label">Hygienically Packed</span>
+      </li>
     </ul>
 
     {%- comment -%} Cooking methods {%- endcomment -%}
@@ -160,6 +175,8 @@
     {%- endif -%}
 
   </div>
+
+  {% render 'akira-sticky-cart' %}
 </div>
 
 {% stylesheet %}

@@ -1,0 +1,80 @@
+{%- doc -%}
+  "How it works" — 4 steps (Order, Delivered Frozen, Cook, Enjoy) with icons.
+  Reusable on the homepage or product page.
+{%- enddoc -%}
+
+<div class="section section--page-width akira-hiw" style="--akira-hiw-bg: {{ section.settings.background_color | default: '#F7F4EE' }};">
+  <div class="akira-hiw__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="akira-hiw__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="akira-hiw__sub">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    <ol class="akira-hiw__grid" role="list">
+      <li class="akira-hiw__step">
+        <span class="akira-hiw__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.5 12.5a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21.5 7H6"/></svg></span>
+        <span class="akira-hiw__num">1</span>
+        <span class="akira-hiw__title">{{ section.settings.s1_title | default: 'Order Online' }}</span>
+        <span class="akira-hiw__text">{{ section.settings.s1_text | default: 'Pick your favourites and check out in minutes.' }}</span>
+      </li>
+      <li class="akira-hiw__step">
+        <span class="akira-hiw__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 7l7 4 7-4M5 17l7-4 7 4M3 12h18"/></svg></span>
+        <span class="akira-hiw__num">2</span>
+        <span class="akira-hiw__title">{{ section.settings.s2_title | default: 'Delivered Frozen' }}</span>
+        <span class="akira-hiw__text">{{ section.settings.s2_text | default: 'Cold-chain delivery keeps it perfectly fresh.' }}</span>
+      </li>
+      <li class="akira-hiw__step">
+        <span class="akira-hiw__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16a0 0 0 0 1 0 0 8 8 0 0 1-8 8 8 8 0 0 1-8-8 0 0 0 0 1 0 0z"/><path d="M7 4c0 1-1 1.5-1 2.5M11 4c0 1-1 1.5-1 2.5M15 4c0 1-1 1.5-1 2.5M3 20h18"/></svg></span>
+        <span class="akira-hiw__num">3</span>
+        <span class="akira-hiw__title">{{ section.settings.s3_title | default: 'Cook in Minutes' }}</span>
+        <span class="akira-hiw__text">{{ section.settings.s3_text | default: 'Pan-fry, air-fry, bake or microwave — your way.' }}</span>
+      </li>
+      <li class="akira-hiw__step">
+        <span class="akira-hiw__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5a4 4 0 0 0 7 0M9 9.5h.01M15 9.5h.01"/></svg></span>
+        <span class="akira-hiw__num">4</span>
+        <span class="akira-hiw__title">{{ section.settings.s4_title | default: 'Sit Back & Enjoy' }}</span>
+        <span class="akira-hiw__text">{{ section.settings.s4_text | default: 'Restaurant-style taste, ready at home.' }}</span>
+      </li>
+    </ol>
+  </div>
+</div>
+
+{% stylesheet %}
+  .akira-hiw__inner { padding-block: 44px; }
+  .akira-hiw__heading { text-align: center; font-size: 1.6rem; font-weight: 600; color: #263238; margin: 0 0 6px; }
+  .akira-hiw__sub { text-align: center; color: #6b6b63; margin: 0 0 28px; }
+  .akira-hiw__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: step; }
+  .akira-hiw__step { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; background: #fff; border: 1px solid #ECE6D8; border-radius: 16px; padding: 26px 18px 22px; }
+  .akira-hiw__icon { color: #1B5E20; width: 38px; height: 38px; }
+  .akira-hiw__icon svg { width: 38px; height: 38px; }
+  .akira-hiw__num { position: absolute; top: 12px; right: 14px; width: 22px; height: 22px; border-radius: 50%; background: #1B5E20; color: #fff; font-size: 0.75rem; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+  .akira-hiw__title { font-weight: 600; color: #263238; }
+  .akira-hiw__text { font-size: 0.85rem; color: #6b6b63; line-height: 1.45; }
+  @media screen and (max-width: 749px) {
+    .akira-hiw__grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .akira-hiw__inner { padding-block: 32px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Akira how it works",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How it works" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Great food, ready in four simple steps" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#F7F4EE" },
+    { "type": "header", "content": "Steps" },
+    { "type": "text", "id": "s1_title", "label": "Step 1 title", "default": "Order Online" },
+    { "type": "text", "id": "s1_text", "label": "Step 1 text", "default": "Pick your favourites and check out in minutes." },
+    { "type": "text", "id": "s2_title", "label": "Step 2 title", "default": "Delivered Frozen" },
+    { "type": "text", "id": "s2_text", "label": "Step 2 text", "default": "Cold-chain delivery keeps it perfectly fresh." },
+    { "type": "text", "id": "s3_title", "label": "Step 3 title", "default": "Cook in Minutes" },
+    { "type": "text", "id": "s3_text", "label": "Step 3 text", "default": "Pan-fry, air-fry, bake or microwave — your way." },
+    { "type": "text", "id": "s4_title", "label": "Step 4 title", "default": "Sit Back & Enjoy" },
+    { "type": "text", "id": "s4_text", "label": "Step 4 text", "default": "Restaurant-style taste, ready at home." }
+  ],
+  "presets": [{ "name": "Akira how it works" }]
+}
+{% endschema %}

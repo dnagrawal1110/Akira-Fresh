@@ -20,6 +20,10 @@
         "founder_role": "Founder"
       }
     },
+    "akira_recently_viewed": {
+      "type": "akira-recently-viewed",
+      "settings": { "heading": "Recently viewed" }
+    },
     "main": {
       "type": "product-information",
       "blocks": {
@@ -416,6 +420,7 @@
     "akira_breadcrumbs",
     "main",
     "akira_details",
-    "product_recommendations_qggXJq"
+    "product_recommendations_qggXJq",
+    "akira_recently_viewed"
   ]
 }

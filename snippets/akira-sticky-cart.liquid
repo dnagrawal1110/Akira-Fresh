@@ -1,0 +1,88 @@
+{%- doc -%}
+  Mobile sticky add-to-cart bar. Shows the current price and an Add button that
+  proxies to the main product form's add-to-cart (reuses Horizon's cart logic +
+  cart drawer). Mobile only.
+{%- enddoc -%}
+
+{%- liquid
+  assign p = closest.product | default: product
+  assign v = p.selected_or_first_available_variant
+-%}
+
+<div class="akira-sticky-cart" data-akira-sticky-cart>
+  <div class="akira-sticky-cart__info">
+    <span class="akira-sticky-cart__title">{{ p.title | truncate: 28 }}</span>
+    <span class="akira-sticky-cart__price" data-akira-sticky-price>
+      {{ v.price | money }}
+      {%- if v.compare_at_price > v.price -%}
+        <s class="akira-sticky-cart__was">{{ v.compare_at_price | money }}</s>
+      {%- endif -%}
+    </span>
+  </div>
+  <button type="button" class="akira-sticky-cart__btn" data-akira-sticky-add>
+    {%- if v.available -%}Add to cart{%- else -%}Sold out{%- endif -%}
+  </button>
+</div>
+
+<script>
+  (function () {
+    var bar = document.querySelector('[data-akira-sticky-cart]');
+    if (!bar) return;
+    var addBtn = bar.querySelector('[data-akira-sticky-add]');
+    var stickyPrice = bar.querySelector('[data-akira-sticky-price]');
+
+    function mainAddButton() {
+      return document.querySelector('.product-information add-to-cart-component button, .product-information button[name="add"]');
+    }
+
+    addBtn.addEventListener('click', function () {
+      var real = mainAddButton();
+      if (real) real.click();
+    });
+
+    // Keep the sticky price in sync with the main price as variants change.
+    var mainPrice = document.querySelector('.product-information .price, .product-information [class*="price"]');
+    if (mainPrice && 'MutationObserver' in window) {
+      var obs = new MutationObserver(function () {
+        var txt = mainPrice.textContent.trim();
+        if (txt) stickyPrice.textContent = txt;
+      });
+      obs.observe(mainPrice, { childList: true, subtree: true, characterData: true });
+    }
+  })();
+</script>
+
+{% stylesheet %}
+  .akira-sticky-cart { display: none; }
+  @media screen and (max-width: 749px) {
+    .akira-sticky-cart {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 50;
+      padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+      background: #fff;
+      border-top: 1px solid #ECE6D8;
+      box-shadow: 0 -4px 16px rgba(0,0,0,.08);
+    }
+    .akira-sticky-cart__info { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+    .akira-sticky-cart__title { font-size: 0.8rem; color: #6b6b63; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .akira-sticky-cart__price { font-size: 1rem; font-weight: 600; color: #263238; }
+    .akira-sticky-cart__was { color: #9a958a; font-weight: 400; font-size: 0.85rem; margin-left: 6px; }
+    .akira-sticky-cart__btn {
+      flex: none;
+      border: none;
+      background: #1B5E20;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 13px 26px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    /* leave room so the bar doesn't cover the footer/last content */
+    .akira-pdp { padding-bottom: 72px; }
+  }
+{% endstylesheet %}
