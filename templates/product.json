@@ -14,6 +14,13 @@
     },
     "akira_details": {
       "type": "akira-product-details",
+      "blocks": {
+        "judgeme_reviews": {
+          "type": "shopify://apps/judge-me-reviews/blocks/judgeme_review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": ["judgeme_reviews"],
       "settings": {
         "show_founder": true,
         "founder_name": "Zeenat Kureshi",
