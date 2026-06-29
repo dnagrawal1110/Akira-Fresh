@@ -18,12 +18,13 @@
           "type": "_announcement",
           "settings": {
             "text": "Freshness You Can Trust, Quality You Can Taste",
+            "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
             "weight": "400",
             "letter_spacing": "loose",
             "case": "none",
-            "text_color": "#FFFFFF"
+            "text_color": "#ffffff"
           },
           "blocks": {}
         },
@@ -31,12 +32,13 @@
           "type": "_announcement",
           "settings": {
             "text": "❄️ Ships frozen, cold-chain delivered to your door",
+            "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
             "weight": "400",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": "#FFFFFF"
+            "text_color": "#ffffff"
           },
           "blocks": {}
         },
@@ -44,12 +46,13 @@
           "type": "_announcement",
           "settings": {
             "text": "🎉 Free delivery on orders above ₹499",
+            "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
             "weight": "400",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": "#FFFFFF"
+            "text_color": "#ffffff"
           },
           "blocks": {}
         },
@@ -57,12 +60,13 @@
           "type": "_announcement",
           "settings": {
             "text": "100% fresh • No preservatives • Sourced daily",
+            "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
             "weight": "400",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": "#FFFFFF"
+            "text_color": "#ffffff"
           },
           "blocks": {}
         }
@@ -77,8 +81,9 @@
       "settings": {
         "speed": 4,
         "section_width": "full-width",
-        "background_color": "#1B5E20",
+        "background_color": "#1b5e20",
         "divider_width": 0,
+        "divider_color": "",
         "padding-block-start": 10,
         "padding-block-end": 10
       }
@@ -101,6 +106,8 @@
           "static": true,
           "settings": {
             "menu": "main-menu",
+            "background_color": "{{ settings.color_palette.background }}",
+            "text_color": "",
             "type_font_primary_size": "0.875rem",
             "menu_font_style": "inverse",
             "type_font_primary_link": "body",
@@ -110,6 +117,8 @@
             "featured_collections_aspect_ratio": "16 / 9",
             "image_border_radius": 0,
             "navigation_bar": false,
+            "background_color_navigation_bar": "{{ settings.color_palette.background }}",
+            "text_color_navigation_bar": "",
             "drawer_accordion": false,
             "drawer_accordion_expand_first": false,
             "drawer_dividers": false
@@ -121,6 +130,7 @@
         "logo_position": "left",
         "menu_position": "left",
         "menu_row": "top",
+        "customer_account_menu": "customer-account-main-menu",
         "show_search": true,
         "search_position": "right",
         "search_row": "top",
@@ -134,16 +144,31 @@
         "section_width": "page-width",
         "section_height": "standard",
         "enable_sticky_header": "always",
-        "actions_display_style": "icon",
-        "bubble_background_color": "#A66A2C",
-        "bubble_text_color": "#FFFFFF",
         "divider_width": 0,
         "divider_size": "page-width",
+        "divider_color": "",
         "border_width": 0,
-        "background_color_top": "{{ settings.color_palette.background }}",
+        "bottom_border_color": "",
+        "actions_display_style": "icon",
+        "actions_font_size": "0.875rem",
+        "actions_font": "body",
+        "actions_text_case": "none",
+        "background_color_top": "#FFFFFF",
+        "text_color_top": "",
+        "background_color_bottom": "",
+        "text_color_bottom": "",
+        "bubble_style": "default",
+        "bubble_background_color": "#a66a2c",
+        "bubble_text_color": "#ffffff",
         "enable_transparent_header_home": false,
+        "home_inverse_logo": false,
+        "text_color_transparent_home": "",
         "enable_transparent_header_product": false,
-        "enable_transparent_header_collection": false
+        "product_inverse_logo": false,
+        "text_color_transparent_product": "",
+        "enable_transparent_header_collection": false,
+        "collection_inverse_logo": false,
+        "text_color_transparent_collection": ""
       }
     }
   },

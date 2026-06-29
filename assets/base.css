@@ -649,17 +649,51 @@ p:empty {
   object-fit: cover;
 }
 
-/* A clearer, brand-coloured quick-add ("ADD") button. */
+/* A clearer, brand-coloured quick-add button: solid green with a white ring
+   and shadow so it stays visible on busy product photos. */
 .product-card .quick-add-component button,
 .product-card .quick-add__button {
   background: #1b5e20;
   color: #fff;
-  border-color: #1b5e20;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+}
+
+.product-card .quick-add-component button svg,
+.product-card .quick-add__button svg {
+  color: #fff;
 }
 
 .product-card .quick-add-component button:hover,
 .product-card .quick-add__button:hover {
   background: #14471a;
+}
+
+/* Keep the quick-add button visible at rest on desktop (the base theme only
+   reveals it on hover, making it easy to miss). */
+@media screen and (min-width: 750px) {
+  .product-card .quick-add__button {
+    opacity: 1;
+  }
+}
+
+/* Footer logo sits on the dark green footer; the green-on-white logo needs a
+   white chip to stay legible. */
+footer .logo-block__image-wrapper {
+  display: inline-block;
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+
+/* Card maturity: gentle lift + shadow on hover. */
+:is(.product-grid__item, .resource-list__item) .product-card {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+:is(.product-grid__item, .resource-list__item) .product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.1);
 }
 
 .section--height-small {

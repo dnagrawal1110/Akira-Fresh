@@ -14,7 +14,6 @@
     "footer_m9NzUG": {
       "type": "footer",
       "blocks": {
-
         "col1_brand": {
           "type": "group",
           "name": "Brand",
@@ -36,14 +35,14 @@
             "background_media": "none",
             "video_position": "cover",
             "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
             "toggle_overlay": false,
             "overlay_color": "#00000026",
             "overlay_style": "solid",
             "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
             "open_in_new_tab": false,
             "padding-block-start": 0,
             "padding-block-end": 0,
@@ -55,8 +54,6 @@
               "type": "logo",
               "name": "Logo",
               "settings": {
-                "logo_max_width": 140,
-                "logo_max_width_mobile": 120,
                 "padding-block-start": 0,
                 "padding-block-end": 8,
                 "padding-inline-start": 0,
@@ -69,7 +66,6 @@
               "name": "Tagline",
               "settings": {
                 "text": "<p>Freshness You Can Trust, Quality You Can Taste</p>",
-                "text_color": "#F7F4EE",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -80,6 +76,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
+                "text_color": "#F7F4EE",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -95,7 +92,6 @@
               "name": "Description",
               "settings": {
                 "text": "<p>Premium frozen chicken & mutton snacks, delivered cold across India.</p>",
-                "text_color": "#B2DFDB",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -106,6 +102,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
+                "text_color": "#B2DFDB",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -117,9 +114,12 @@
               "blocks": {}
             }
           },
-          "block_order": ["col1_logo", "col1_tagline", "col1_desc"]
+          "block_order": [
+            "col1_logo",
+            "col1_tagline",
+            "col1_desc"
+          ]
         },
-
         "col2_shop": {
           "type": "menu",
           "name": "Shop",
@@ -138,7 +138,6 @@
           },
           "blocks": {}
         },
-
         "col3_help": {
           "type": "menu",
           "name": "Help & Info",
@@ -157,7 +156,6 @@
           },
           "blocks": {}
         },
-
         "col4_connect": {
           "type": "group",
           "name": "Connect",
@@ -179,14 +177,14 @@
             "background_media": "none",
             "video_position": "cover",
             "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
             "toggle_overlay": false,
             "overlay_color": "#00000026",
             "overlay_style": "solid",
             "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
             "open_in_new_tab": false,
             "padding-block-start": 0,
             "padding-block-end": 0,
@@ -199,7 +197,6 @@
               "name": "Heading",
               "settings": {
                 "text": "<h6>Connect</h6>",
-                "text_color": "#FFFFFF",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -210,6 +207,7 @@
                 "letter_spacing": "loose",
                 "case": "uppercase",
                 "wrap": "pretty",
+                "text_color": "#FFFFFF",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -252,7 +250,6 @@
               "name": "Newsletter heading",
               "settings": {
                 "text": "<p>Get fresh drops & offers — straight to your inbox</p>",
-                "text_color": "#F7F4EE",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -263,6 +260,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
+                "text_color": "#F7F4EE",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -321,7 +319,6 @@
             "col4_payment"
           ]
         }
-
       },
       "block_order": [
         "col1_brand",
@@ -338,7 +335,6 @@
         "padding-block-end": 60
       }
     },
-
     "footer_utilities_jLGE8U": {
       "type": "footer-utilities",
       "blocks": {
@@ -368,9 +364,9 @@
       "settings": {
         "section_width": "page-width",
         "gap": 24,
+        "background_color": "#1B5E20",
         "divider_thickness": 0,
         "divider_color": "#2E7D32",
-        "background_color": "#1B5E20",
         "padding-block-start": 16,
         "padding-block-end": 32
       }
