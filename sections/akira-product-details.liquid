@@ -1,0 +1,243 @@
+{%- doc -%}
+  Akira Fresh — premium, metafield-driven product detail content.
+  Renders below the main product area. Every block degrades gracefully:
+  if its metafield is empty the block hides itself (no blank labels).
+{%- enddoc -%}
+
+{%- liquid
+  assign p = section.settings.product | default: closest.product | default: product
+  assign mf = p.metafields.custom
+  assign highlights = mf.key_highlights.value
+  assign nutrition = mf.nutrition.value
+  assign faqs = mf.faq.value
+  assign has_cooking = false
+  if mf.cooking_pan_fry != blank or mf.cooking_air_fry != blank or mf.cooking_oven != blank or mf.cooking_microwave != blank
+    assign has_cooking = true
+  endif
+  assign country = mf.country_of_origin | default: 'India'
+  assign fssai = mf.fssai_license | default: '11523998000532'
+-%}
+
+<div class="section section--page-width akira-pdp">
+  <div class="akira-pdp__inner">
+
+    {%- comment -%} Trust badges {%- endcomment -%}
+    <ul class="akira-trust" role="list">
+      {%- assign trust = 'Made with Real Meat,Freshly Prepared,Premium Quality,Cold Chain Delivered,FSSAI Certified,Hygienically Packed' | split: ',' -%}
+      {%- for t in trust -%}
+        <li class="akira-trust__item">
+          <span class="akira-trust__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          </span>
+          <span class="akira-trust__label">{{ t }}</span>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {%- comment -%} Cooking methods {%- endcomment -%}
+    {%- if has_cooking -%}
+      <section class="akira-card akira-cooking">
+        <h2 class="akira-h">Ready in minutes — your way</h2>
+        <div class="akira-cooking__grid">
+          {%- assign methods = 'cooking_pan_fry|Pan Fry,cooking_air_fry|Air Fry,cooking_oven|Oven,cooking_microwave|Microwave' | split: ',' -%}
+          {%- for m in methods -%}
+            {%- assign mkey = m | split: '|' | first -%}
+            {%- assign mlabel = m | split: '|' | last -%}
+            {%- assign mval = mf[mkey] -%}
+            {%- if mval != blank -%}
+              <div class="akira-cooking__item">
+                <span class="akira-cooking__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+                </span>
+                <span class="akira-cooking__name">{{ mlabel }}</span>
+                <span class="akira-cooking__time">{{ mval }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} Info accordion: ingredients / nutrition / allergens / storage / shelf life {%- endcomment -%}
+    {%- if mf.ingredients != blank or nutrition != blank or mf.allergen_info != blank or mf.storage_instructions != blank or mf.shelf_life != blank -%}
+      <div class="akira-accordion">
+        {%- if mf.ingredients != blank -%}
+          <details class="akira-acc" open>
+            <summary class="akira-acc__head"><span>Ingredients</span><span class="akira-acc__sign" aria-hidden="true"></span></summary>
+            <div class="akira-acc__body rte">{{ mf.ingredients | metafield_tag }}</div>
+          </details>
+        {%- endif -%}
+
+        {%- if nutrition != blank -%}
+          <details class="akira-acc">
+            <summary class="akira-acc__head"><span>Nutritional information</span><span class="akira-acc__sign" aria-hidden="true"></span></summary>
+            <div class="akira-acc__body">
+              <p class="akira-acc__note">Per 100 g</p>
+              <table class="akira-nutri">
+                {%- assign rows = 'energy|Energy,protein|Protein,carbohydrates|Carbohydrates,sugars|Sugars,total_fat|Total fat,saturated_fat|Saturated fat,trans_fat|Trans fat,cholesterol|Cholesterol,sodium|Sodium' | split: ',' -%}
+                {%- for r in rows -%}
+                  {%- assign rkey = r | split: '|' | first -%}
+                  {%- assign rlabel = r | split: '|' | last -%}
+                  {%- assign rval = nutrition[rkey] -%}
+                  {%- if rval != blank -%}
+                    <tr><th scope="row">{{ rlabel }}</th><td>{{ rval }}</td></tr>
+                  {%- endif -%}
+                {%- endfor -%}
+              </table>
+            </div>
+          </details>
+        {%- endif -%}
+
+        {%- if mf.allergen_info != blank -%}
+          <details class="akira-acc">
+            <summary class="akira-acc__head"><span>Allergen information</span><span class="akira-acc__sign" aria-hidden="true"></span></summary>
+            <div class="akira-acc__body rte">{{ mf.allergen_info | metafield_tag }}</div>
+          </details>
+        {%- endif -%}
+
+        {%- if mf.storage_instructions != blank -%}
+          <details class="akira-acc">
+            <summary class="akira-acc__head"><span>Storage instructions</span><span class="akira-acc__sign" aria-hidden="true"></span></summary>
+            <div class="akira-acc__body rte">{{ mf.storage_instructions | metafield_tag }}</div>
+          </details>
+        {%- endif -%}
+
+        {%- if mf.shelf_life != blank -%}
+          <details class="akira-acc">
+            <summary class="akira-acc__head"><span>Shelf life</span><span class="akira-acc__sign" aria-hidden="true"></span></summary>
+            <div class="akira-acc__body rte">{{ mf.shelf_life }}</div>
+          </details>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Product details band {%- endcomment -%}
+    <section class="akira-card akira-details">
+      <h2 class="akira-h">Product details</h2>
+      <dl class="akira-details__grid">
+        {%- assign v = p.selected_or_first_available_variant -%}
+        {%- if v.weight > 0 -%}<div><dt>Net weight</dt><dd>{{ v.weight | weight_with_unit: v.weight_unit }}{% if v.metafields.custom.pack_descriptor != blank %} · {{ v.metafields.custom.pack_descriptor }}{% endif %}</dd></div>{%- endif -%}
+        <div><dt>Country of origin</dt><dd>{{ country }}</dd></div>
+        <div><dt>FSSAI license</dt><dd>{{ fssai }}</dd></div>
+        <div><dt>Best before</dt><dd>Refer to pack</dd></div>
+        {%- if mf.marketed_by != blank -%}<div><dt>Marketed by</dt><dd>{{ mf.marketed_by }}</dd></div>{%- endif -%}
+      </dl>
+    </section>
+
+    {%- comment -%} Cold chain / delivery {%- endcomment -%}
+    <section class="akira-card akira-cold">
+      <span class="akira-cold__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M4 7l8 5 8-5M4 17l8-5 8 5M12 2l0 0M2 12h20"/></svg>
+      </span>
+      <div>
+        <p class="akira-cold__title">Delivered frozen, via cold chain</p>
+        <p class="akira-cold__text">Temperature-controlled all the way to your door. Currently delivering across <strong>Delhi NCR</strong>.</p>
+      </div>
+    </section>
+
+    {%- comment -%} Meet the founder {%- endcomment -%}
+    {%- if section.settings.show_founder -%}
+      <section class="akira-card akira-founder">
+        <h2 class="akira-h">Food that brings people together</h2>
+        <p class="akira-founder__text">{{ section.settings.founder_text }}</p>
+        <p class="akira-founder__by">— {{ section.settings.founder_name }}, {{ section.settings.founder_role }}</p>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} FAQ {%- endcomment -%}
+    {%- if faqs != blank and faqs.size > 0 -%}
+      <section class="akira-faq">
+        <h2 class="akira-h">Frequently asked questions</h2>
+        <div class="akira-accordion">
+          {%- for item in faqs -%}
+            <details class="akira-acc">
+              <summary class="akira-acc__head"><span>{{ item.question }}</span><span class="akira-acc__sign" aria-hidden="true"></span></summary>
+              <div class="akira-acc__body rte">{{ item.answer }}</div>
+            </details>
+          {%- endfor -%}
+        </div>
+      </section>
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% stylesheet %}
+  .akira-pdp__inner { display: flex; flex-direction: column; gap: 28px; padding-block: 8px 40px; }
+  .akira-pdp .akira-h { font-size: 1.25rem; font-weight: 600; color: #1B5E20; margin: 0 0 14px; }
+  .akira-card { background: #fff; border: 1px solid #ECE6D8; border-radius: 16px; padding: 22px 22px; }
+
+  /* Trust badges */
+  .akira-trust { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+  .akira-trust__item { display: flex; align-items: center; gap: 10px; }
+  .akira-trust__icon { color: #1B5E20; flex: none; width: 26px; height: 26px; }
+  .akira-trust__icon svg { width: 26px; height: 26px; }
+  .akira-trust__label { font-size: 0.9rem; color: #263238; line-height: 1.25; }
+
+  /* Cooking */
+  .akira-cooking__grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+  .akira-cooking__item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; background: #F7F4EE; border-radius: 12px; padding: 16px 10px; }
+  .akira-cooking__icon { color: #1B5E20; width: 30px; height: 30px; }
+  .akira-cooking__icon svg { width: 30px; height: 30px; }
+  .akira-cooking__name { font-weight: 600; font-size: 0.92rem; color: #263238; }
+  .akira-cooking__time { font-size: 0.82rem; color: #6b6b63; }
+
+  /* Accordion */
+  .akira-accordion { border: 1px solid #ECE6D8; border-radius: 16px; overflow: hidden; }
+  .akira-acc { border-bottom: 1px solid #ECE6D8; }
+  .akira-acc:last-child { border-bottom: 0; }
+  .akira-acc__head { display: flex; justify-content: space-between; align-items: center; gap: 12px; cursor: pointer; padding: 18px 20px; font-weight: 600; color: #263238; list-style: none; }
+  .akira-acc__head::-webkit-details-marker { display: none; }
+  .akira-acc__sign { position: relative; width: 14px; height: 14px; flex: none; }
+  .akira-acc__sign::before, .akira-acc__sign::after { content: ''; position: absolute; background: #1B5E20; transition: opacity .2s; }
+  .akira-acc__sign::before { top: 6px; left: 0; width: 14px; height: 2px; }
+  .akira-acc__sign::after { left: 6px; top: 0; width: 2px; height: 14px; }
+  .akira-acc[open] .akira-acc__sign::after { opacity: 0; }
+  .akira-acc__body { padding: 0 20px 20px; color: #3a3a36; line-height: 1.6; font-size: 0.95rem; }
+  .akira-acc__note { font-size: 0.8rem; color: #6b6b63; margin: 0 0 8px; text-transform: uppercase; letter-spacing: .04em; }
+
+  /* Nutrition table */
+  .akira-nutri { width: 100%; border-collapse: collapse; }
+  .akira-nutri th, .akira-nutri td { text-align: left; padding: 9px 0; border-bottom: 1px solid #F0EBDF; font-size: 0.92rem; }
+  .akira-nutri th { font-weight: 400; color: #6b6b63; }
+  .akira-nutri td { text-align: right; color: #263238; font-weight: 500; }
+
+  /* Details band */
+  .akira-details__grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px 24px; margin: 0; }
+  .akira-details__grid dt { font-size: 0.78rem; text-transform: uppercase; letter-spacing: .04em; color: #6b6b63; margin: 0 0 2px; }
+  .akira-details__grid dd { margin: 0; color: #263238; font-weight: 500; }
+
+  /* Cold chain */
+  .akira-cold { display: flex; gap: 16px; align-items: center; background: #1B5E20; border-color: #1B5E20; color: #fff; }
+  .akira-cold__icon { color: #fff; width: 34px; height: 34px; flex: none; }
+  .akira-cold__icon svg { width: 34px; height: 34px; }
+  .akira-cold__title { margin: 0 0 2px; font-weight: 600; }
+  .akira-cold__text { margin: 0; font-size: 0.9rem; color: #DDEBD9; }
+  .akira-cold__text strong { color: #fff; }
+
+  /* Founder */
+  .akira-founder__text { margin: 0 0 10px; color: #3a3a36; line-height: 1.6; }
+  .akira-founder__by { margin: 0; color: #1B5E20; font-weight: 600; }
+
+  @media screen and (max-width: 749px) {
+    .akira-trust { grid-template-columns: repeat(2,1fr); }
+    .akira-cooking__grid { grid-template-columns: repeat(2,1fr); }
+    .akira-details__grid { grid-template-columns: 1fr; }
+    .akira-cold { flex-direction: row; align-items: flex-start; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Akira product details",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product", "info": "Leave blank on a product template to use the current product." },
+    { "type": "header", "content": "Meet the founder" },
+    { "type": "checkbox", "id": "show_founder", "label": "Show founder block", "default": true },
+    { "type": "textarea", "id": "founder_text", "label": "Founder text", "default": "Akira Fresh began with a simple belief — great food shouldn't cost you time. Every pack is prepared with care, so good meals are always within reach for your family." },
+    { "type": "text", "id": "founder_name", "label": "Founder name", "default": "Zeenat Kureshi" },
+    { "type": "text", "id": "founder_role", "label": "Founder role", "default": "Founder" }
+  ],
+  "presets": [{ "name": "Akira product details" }]
+}
+{% endschema %}

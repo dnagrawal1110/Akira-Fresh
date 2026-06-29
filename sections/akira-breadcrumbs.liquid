@@ -1,0 +1,37 @@
+{%- doc -%}
+  Breadcrumbs: Home > Collection > Product.
+{%- enddoc -%}
+
+{%- liquid
+  assign p = closest.product | default: product
+  assign col = p.collections.first
+-%}
+
+<nav class="section section--page-width akira-breadcrumbs" aria-label="Breadcrumb">
+  <ol class="akira-breadcrumbs__list" role="list">
+    <li><a href="{{ routes.root_url }}">Home</a></li>
+    {%- if col -%}
+      <li aria-hidden="true" class="akira-breadcrumbs__sep">/</li>
+      <li><a href="{{ col.url }}">{{ col.title }}</a></li>
+    {%- endif -%}
+    <li aria-hidden="true" class="akira-breadcrumbs__sep">/</li>
+    <li aria-current="page">{{ p.title }}</li>
+  </ol>
+</nav>
+
+{% stylesheet %}
+  .akira-breadcrumbs { padding-block: 14px 4px; }
+  .akira-breadcrumbs__list { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; list-style: none; margin: 0; padding: 0; font-size: 0.82rem; color: #6b6b63; }
+  .akira-breadcrumbs__list a { color: #6b6b63; text-decoration: none; }
+  .akira-breadcrumbs__list a:hover { color: #1B5E20; }
+  .akira-breadcrumbs__sep { color: #cfc9bb; }
+  .akira-breadcrumbs li[aria-current="page"] { color: #263238; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Akira breadcrumbs",
+  "settings": [],
+  "presets": [{ "name": "Akira breadcrumbs" }]
+}
+{% endschema %}

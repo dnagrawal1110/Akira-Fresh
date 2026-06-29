@@ -1,0 +1,39 @@
+{%- doc -%}
+  Renders Akira buy-box extras inside the product detail column:
+  short intro, key-highlight chips and the Delhi NCR delivery line.
+  All degrade gracefully when their metafield is empty.
+{%- enddoc -%}
+
+{%- liquid
+  assign p = closest.product | default: product
+  assign mf = p.metafields.custom
+  assign highlights = mf.key_highlights.value
+-%}
+
+<div class="akira-buybox">
+  {%- if mf.short_intro != blank -%}
+    <p class="akira-buybox__intro">{{ mf.short_intro }}</p>
+  {%- endif -%}
+
+  {%- if highlights != blank and highlights.size > 0 -%}
+    <ul class="akira-chips" role="list">
+      {%- for h in highlights -%}
+        <li class="akira-chip">{{ h }}</li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+
+  <p class="akira-deliver">
+    <span class="akira-deliver__dot" aria-hidden="true"></span>
+    Currently delivering across <strong>Delhi NCR</strong>
+  </p>
+</div>
+
+{% stylesheet %}
+  .akira-buybox { display: flex; flex-direction: column; gap: 14px; }
+  .akira-buybox__intro { margin: 0; color: #3a3a36; line-height: 1.6; }
+  .akira-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .akira-chip { background: #EAF1E8; color: #1B5E20; font-size: 0.8rem; font-weight: 500; padding: 6px 12px; border-radius: 999px; }
+  .akira-deliver { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 0.88rem; color: #263238; }
+  .akira-deliver__dot { width: 8px; height: 8px; border-radius: 50%; background: #1B5E20; flex: none; box-shadow: 0 0 0 3px rgba(27,94,32,.15); }
+{% endstylesheet %}

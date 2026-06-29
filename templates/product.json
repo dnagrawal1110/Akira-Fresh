@@ -8,6 +8,18 @@
  * ------------------------------------------------------------
  */{
   "sections": {
+    "akira_breadcrumbs": {
+      "type": "akira-breadcrumbs",
+      "settings": {}
+    },
+    "akira_details": {
+      "type": "akira-product-details",
+      "settings": {
+        "show_founder": true,
+        "founder_name": "Zeenat Kureshi",
+        "founder_role": "Founder"
+      }
+    },
     "main": {
       "type": "product-information",
       "blocks": {
@@ -151,6 +163,13 @@
                 "price_tVjtKg"
               ]
             },
+            "akira_extras": {
+              "type": "custom-liquid",
+              "settings": {
+                "custom_liquid": "{% render 'akira-buybox-extras' %}"
+              },
+              "blocks": {}
+            },
             "divider_VJhene": {
               "type": "_divider",
               "name": "t:names.divider",
@@ -238,6 +257,7 @@
           },
           "block_order": [
             "group_icgrde",
+            "akira_extras",
             "divider_VJhene",
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi",
@@ -393,7 +413,9 @@
     }
   },
   "order": [
+    "akira_breadcrumbs",
     "main",
+    "akira_details",
     "product_recommendations_qggXJq"
   ]
 }
