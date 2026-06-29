@@ -130,10 +130,23 @@
           {{ meta_rating.rating }} ({{ meta_rating_count | default: 0 }})
         </span>
       {%- endif -%}
+      {%- assign meta_pack = meta_variant.metafields.custom.pack_descriptor -%}
       <div class="product-card__meta">
-        <span class="product-card__veg" aria-hidden="true" title="Non-vegetarian"></span>
-        <span class="product-card__meta-text">
-          {%- if meta_protein != blank -%}{{ meta_protein }} protein{% elsif meta_weight > 0 %}{{ meta_weight | weight_with_unit: meta_variant.weight_unit }}{% endif -%}
+        {%- if meta_weight > 0 or meta_pack != blank -%}
+          <span class="product-card__meta-line">
+            {%- if meta_pack != blank -%}{{ meta_pack }}
+            {%- elsif meta_weight > 0 -%}{{ meta_weight | weight_with_unit: meta_variant.weight_unit }}{%- endif -%}
+          </span>
+        {%- endif -%}
+        {%- if meta_protein != blank -%}
+          <span class="product-card__protein">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21c0-7 4-12 14-13-1 9-6 13-12 13M5 21c0-4 2-7 6-9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            {{ meta_protein }} protein
+          </span>
+        {%- endif -%}
+        <span class="product-card__slot">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Today 6AM&nbsp;-&nbsp;8AM
         </span>
       </div>
     {%- endunless -%}
