@@ -147,9 +147,9 @@
           </span>
         {%- endif -%}
         <span class="product-card__price">
-          <span class="product-card__price-now">{{ meta_price | money }}</span>
+          <span class="product-card__price-now">{{ meta_price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</span>
           {%- if meta_compare > meta_price -%}
-            <s class="product-card__price-was">{{ meta_compare | money }}</s>
+            <s class="product-card__price-was">{{ meta_compare | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</s>
             {%- assign meta_pct = meta_compare | minus: meta_price | times: 100 | divided_by: meta_compare -%}
             <span class="product-card__price-off">{{ meta_pct }}% off</span>
           {%- endif -%}

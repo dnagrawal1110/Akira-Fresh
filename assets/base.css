@@ -521,25 +521,35 @@ p:empty {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Pad the card content; pull the image flush to the card edges. */
+/* Pad the card content; pull the image flush to the card edges. Tight, even
+   vertical rhythm between title, meta, price and slot. */
 :is(.product-grid__item, .resource-list__item) .product-card__content {
   padding: 0 14px 14px;
+  gap: 4px !important;
 }
 
 :is(.product-grid__item, .resource-list__item) .product-card__content > :first-child {
   margin: 0 -14px 12px;
 }
 
-.product-card .card-gallery {
+/* 4:3 media that adapts to the card width. */
+.product-card .card-gallery,
+.product-card .card-gallery .resource-image,
+.product-card .card-gallery .resource-image__image {
   border-radius: 0;
   overflow: hidden;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 3;
 }
 
 .product-card .card-gallery img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Keep the price + % off pill on one line. */
+.product-card__price {
+  flex-wrap: nowrap;
 }
 
 /* Bigger, bolder title. */
@@ -743,10 +753,10 @@ p:empty {
   color: #c0392b;
 }
 
-/* Consistent square media so rows line up cleanly. */
+/* Consistent 4:3 media so rows line up cleanly. */
 :is(.product-grid__item, .resource-list__item) .product-card .card-gallery,
 :is(.product-grid__item, .resource-list__item) .product-card .card-gallery img {
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 3;
 }
 
 :is(.product-grid__item, .resource-list__item) .product-card .card-gallery img {
